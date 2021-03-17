@@ -5,22 +5,8 @@ const stringToArray = R.split("");
 
 /* Question 1 */
 
-
-// export const countVowels: (s: string) => number = (s) => {
-//     const arr: string[] = R.pipe(
-//         (s: string) => s.toLowerCase(),
-//         (s: string) => stringToArray(s),
-//         (arr: string[]) => {
-//             const vowels: string[] = ['a', 'e', 'i', 'o', 'u'];
-//             const filtered: string[] = arr.filter(item => vowels.includes(item))
-//             return filtered;
-//         }
-//     )(s);
-//     return arr.length;
-// }
-
 export const countVowels: (s: string) => number = (s) => {
-    return stringToArray(s.toLowerCase()).filter(item => ['a', 'e', 'i', 'o', 'u'].includes(item)).length;
+    return stringToArray(s.toLowerCase()).filter((item: string) => ['a', 'e', 'i', 'o', 'u'].includes(item)).length;
 }
 
 
@@ -38,8 +24,15 @@ export const runLengthEncoding: (s: string) => string = (s) => {
 console.log(runLengthEncoding("aaaabbbccd"));
 
 /* Question 3 */
-export const isPaired = undefined;
+export const isPaired: (s: string) => boolean = (s) => {
+    const arr: string[] = stringToArray(s).filter((item: string) => ['(', '[', '{', '<', '>', '}', ']', ')'].includes(item));
+    return parCheck(arr);
+}
 
+const parCheck: (arr: string[]) => boolean = (arr) => {
+
+    return parCheck(arr.filter((value: string, index: number) => index != 0 || index != ))
+}
 
 let arr: <T>(x: T[], y: (element: T) => boolean) => boolean = (x, y) => x.some(y);
 
