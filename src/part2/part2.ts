@@ -25,18 +25,14 @@ console.log(runLengthEncoding("aaaabbbccd"));
 
 /* Question 3 */
 export const isPaired: (s: string) => boolean = (s) => {
-    const arr: string[] = stringToArray(s).filter((item: string) => ['(', '[', '{', '<', '>', '}', ']', ')'].includes(item));
+    const arr: string[] = stringToArray(s).filter((item: string) => ['(', '[', '{', '}', ']', ')'].includes(item));
     return parCheck(arr);
 }
 
 const parCheck: (arr: string[]) => boolean = (arr) => {
 
-    return parCheck(arr.filter((value: string, index: number) => index != 0 || index != ))
+    return parCheck(arr.filter((value: string, index: number) => index != 0 || index != )) //not finished
 }
 
-let arr: <T>(x: T[], y: (element: T) => boolean) => boolean = (x, y) => x.some(y);
 
-let b: (x: number[]) => number = x => x.reduce((acc: number, cur: number) => acc + cur, 0);
-
-let c: <T1, T2>(x: T1 | undefined, y: T2[]) => T2 | undefined = (x, y) => x ? y[0] : y[1];
 
