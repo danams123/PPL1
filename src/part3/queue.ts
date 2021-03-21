@@ -3,10 +3,10 @@ import * as R from "ramda";
 
 export type Queue = number[];
 
-export const enqueue: (x: number) => State<Queue, number> = (x) => {
+export const enqueue: (x: number) => State<Queue, undefined> = (x) => {
     return (queue: Queue) => {
         const nQueue: Queue = R.prepend(x, queue);
-        return [nQueue,];
+        return [nQueue, undefined];
     }
 }
 
