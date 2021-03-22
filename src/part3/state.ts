@@ -4,10 +4,3 @@ export const bind: <S, A, B>(state: State<S, A>, f: (x: A) => State<S, B>) => St
     const [_state, _value] = state(s);
     return f(_value)(_state);
 }
-
-// export function  bind<a, b>(stateMonad: State<a>, fn: (value: a) => State<b>): State<b> {
-//     return (x: number) => {
-//         const [_value, _state] = stateMonad(x);
-//         return fn(_value)(_state);
-//     }
-// }

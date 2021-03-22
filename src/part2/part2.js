@@ -4,18 +4,6 @@ exports.isPaired = exports.runLengthEncoding = exports.countVowels = void 0;
 var R = require("ramda");
 var stringToArray = R.split("");
 /* Question 1 */
-// export const countVowels: (s: string) => number = (s) => {
-//     const arr: string[] = R.pipe(
-//         (s: string) => s.toLowerCase(),
-//         (s: string) => stringToArray(s),
-//         (arr: string[]) => {
-//             const vowels: string[] = ['a', 'e', 'i', 'o', 'u'];
-//             const filtered: string[] = arr.filter(item => vowels.includes(item))
-//             return filtered;
-//         }
-//     )(s);
-//     return arr.length;
-// }
 var countVowels = function (s) {
     return stringToArray(s.toLowerCase()).filter(function (item) { return ['a', 'e', 'i', 'o', 'u'].includes(item); }).length;
 };
@@ -29,9 +17,28 @@ var runLengthEncoding = function (s) {
     }, "");
 };
 exports.runLengthEncoding = runLengthEncoding;
-console.log(exports.runLengthEncoding("aAAcsaaccd"));
+console.log(exports.runLengthEncoding("aaaabbbccd"));
 /* Question 3 */
-exports.isPaired = undefined;
-var arr = function (x, y) { return x.some(y); };
-var b = function (x) { return x.reduce(function (acc, cur) { return acc + cur; }, 0); };
-var c = function (x, y) { return x ? y[0] : y[1]; };
+var isPaired = function (s) {
+    var arr = stringToArray(s).filter(function (item) { return ['(', '[', '{', '}', ']', ')'].includes(item); });
+    return parCheck(arr);
+};
+exports.isPaired = isPaired;
+var parCheck = function (arr) {
+    if (arr.length === 0)
+        return true;
+    var first = arr[0];
+    var check = (first === '(') ? ')' : (first === '[') ? ']' : (first === '{') ? '}' : "";
+    var counter = 0;
+    var i = arr.reduce(function (acc, curr, index, arr) {
+        (['(', '[', '{'].includes(curr)) ? acc = acc + 1 : acc = acc - 1;
+        if (acc === 0 && curr === check && index !== 0) {
+            acc = index;
+            index = arr.length;
+        }
+        return acc;
+    }, 0);
+    var nArr = R.remove(0, 1, arr);
+    return ((i === arr.length - 1 && arr[i] === check) || (i !== 0)) ? parCheck(R.remove(i - 1, 1, nArr)) : false;
+};
+console.log(exports.isPaired("(]"));

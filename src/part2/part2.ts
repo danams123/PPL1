@@ -1,4 +1,4 @@
-import { log } from "node:console";
+import { countReset, log } from "node:console";
 import * as R from "ramda";
 
 const stringToArray = R.split("");
@@ -29,10 +29,24 @@ export const isPaired: (s: string) => boolean = (s) => {
     return parCheck(arr);
 }
 
-const parCheck: (arr: string[]) => boolean = (arr) => {
 
-    return parCheck(arr.filter((value: string, index: number) => index != 0 || index != )) //not finished
+
+const parCheck: (arr: string[]) => boolean = (arr) => {
+    if (arr.length === 0) return true;
+    const first: string = arr[0];
+    const check = (first === '(') ? ')' : (first === '[') ? ']' : (first === '{') ? '}' : "";
+    const counter: number = 0;
+    const i: number = arr.reduce((acc: number, curr: string, index: number, arr: string[]) => {
+        (['(', '[', '{'].includes(curr)) ? acc = acc + 1 : acc = acc - 1;
+        if (acc === 0 && curr === check && index !== 0) {
+            acc = index;
+            index = arr.length;
+        }
+        return acc;
+    }, 0)
+    const nArr: string[] = R.remove(0, 1, arr);
+    return ((i === arr.length - 1 && arr[i] === check) || (i !== 0)) ? parCheck(R.remove(i - 1, 1, nArr)) : false;
 }
 
 
-
+console.log(isPaired("(]"));
