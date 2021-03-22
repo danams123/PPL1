@@ -12,7 +12,7 @@ export const push: (x: number) => State<Stack, undefined> = (x) => {
 
 export const pop: (stack: Stack) => [Stack, number] = (stack) => {
     const toDel = stack[0];
-    const nStack = R.drop(0, stack);
+    const nStack = R.drop(1, stack);
     return [nStack, toDel];
 }
 
